@@ -17,9 +17,10 @@ const userSchema = new mongoose.Schema(
       required: true,
     }
   },
+  // Enable automatic timestamps for 'createdAt' and 'updatedAt'
     {timestamps: true}
   );
-
+  // Create a Mongoose model based on the schema and export it
   const User = mongoose.model('User', userSchema);
 
   export default User;
