@@ -27,3 +27,18 @@ app.listen(3000, () => {
 app.use('/api/user', useRoutes);
 // Use 'authRoutes' for handling routes prefixed with '/api/auth'
 app.use('/api/auth', authRoutes);
+
+// Middleware function for error handling
+//captures any errors that occur during request processing
+app.use((err, req, res, next) => {
+   // Get the status code from the error object; default to 500
+  const statusCode = err.statusCode || 500;
+  // Get the error message; default to 'Internal Server Error'
+  const message = err.message || 'Internal Server Error';
+  // Send a JSON response with the error details
+  return res.status(statusCode).json({
+    success: false,
+    message,
+    statusCode,
+  });
+});
